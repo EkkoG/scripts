@@ -21,16 +21,29 @@
               document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
       var numbers = document.evaluate('//*[@id="ship_1"]/div/div/div/div/div/div/div[2]',
               document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-
-      var maxNum = Math.max.apply(null, Array.from(numbers).map(function(e) {
+      var nodes = []
+      for (let i = 0; i < numbers.snapshotLength; i++) {
+          nodes.push(numbers.snapshotItem(i));
+      }
+      var maxNum = Math.max.apply(null, Array.from(nodes).map(function(e) {
           var num = e.textContent;
-          console.log(num);
           num = num.replace(/[^0-9\.]/g, "");
           return parseInt(num);
       }));
-      console.log(maxNum);
       // Create table rows
       var rows = [];
+      const header = document.createElement("tr");
+      const header1 = document.createElement("th");
+      header1.textContent = "名字";
+      const header2 = document.createElement("th");
+      header2.textContent = "票数";
+      const header3 = document.createElement("th");
+      header3.textContent = "比例";
+      header.append(header1);
+      header.append(header2);
+      header.append(header3);
+      
+      rows.push(header);
       for (let i = 0; i < names.snapshotLength; i++) {
           var tr = document.createElement("tr");
           var td1 = document.createElement("td");
@@ -49,6 +62,7 @@
 
           tr.append(td1);
           tr.append(td2);
+          tr.append(td3);
           rows.push(tr);
       }
 
@@ -65,7 +79,8 @@
       }
 
       var div = document.createElement("div");
-      div.style.cssText = "position: fixed; top: 0; left: 0; background: #fff; z-index: 999;";
+      div.style.cssText = `position: fixed; top: 0; left: 0; background: #fff; z-index: 999;
+      `;
       div.append(table);
       document.body.append(div);
   });
