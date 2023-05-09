@@ -14,6 +14,34 @@
     button.textContent = "Show Ranking";
     button.style.cssText = "position: fixed; right: 20px; bottom: 20px; z-index: 999;";
     document.body.append(button);  
+
+    // wait class=citem to be loaded with while
+
+    function tryShow() {
+        if (document.getElementsByClassName('citem').length >= 0) {
+            console.log("loaded");
+
+            setInterval(() => {
+                button.style.display = "block";
+
+                // send click event to button
+                var event = new MouseEvent('click', {
+                    'view': window,
+                    'bubbles': true,
+                    'cancelable': true
+                });
+                button.dispatchEvent(event);
+            }, 2000);
+        }
+        else {
+            console.log("waiting");
+            setTimeout(tryShow, 1000);
+        }
+    }
+
+    tryShow();
+
+
     
     // On click, show ranking table  
     button.addEventListener("click", function() {  
