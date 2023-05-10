@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  Add a floating button to show ranking table ordered by number  
 // @author       You  
-// @match        https://lego.mgtv.com/act/3_8_3/20230414cf2023.html?act_name=20230414cf2023&share_id=0HPTWD9XKBM&source=share_20230414cf2023  
+// @match        https://lego.mgtv.com/act/3_8_3/20230414cf2023.html?act_name=20230414cf2023*
 // @grant        none
 // ==/UserScript==
 
@@ -12,10 +12,8 @@
     // Add button  
     var button = document.createElement("button");
     button.textContent = "Show Ranking";
-    button.style.cssText = "position: fixed; right: 20px; bottom: 20px; z-index: 999;";
+    button.style.cssText = "position: fixed; right: 20px; bottom: 20px; z-index: 999; font-size: 20px; display: none;";
     document.body.append(button);  
-
-    // wait class=citem to be loaded with while
 
     function tryShow() {
         if (document.getElementsByClassName('citem').length >= 0) {
