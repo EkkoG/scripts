@@ -39,9 +39,6 @@
         }
     }
 
-    tryShow();
-
-
     
     // On click, show ranking table  
     button.addEventListener("click", function() {  
@@ -64,7 +61,7 @@
         
         // Sort numbers in descending order
         finalData.sort((a, b) => b.num - a.num);
-        const max = Math.max(...finalData.map(item => item.num));
+        const max = finalData[0].num;
         
         // Create header row
         var header = document.createElement("tr");
@@ -121,4 +118,7 @@
         div.append(table);
         document.body.append(div);
     });  
+
+    tryShow();
+
 })();
